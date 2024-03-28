@@ -2,6 +2,7 @@ import React from "react";
 import { NETFLIX_LOGO } from "../Utils/Images";
 import { LOGIN_PAGE_BACKGROUND_IMG } from "../Utils/Images";
 
+//Will be using later point of time
 const SignUp = () => {
   return (
     <div>
