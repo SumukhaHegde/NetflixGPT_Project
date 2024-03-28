@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { NETFLIX_LOGO } from "../Utils/Images";
-import { Link } from "react-router-dom";
 import { LOGIN_PAGE_BACKGROUND_IMG } from "../Utils/Images";
 import validateDetails from "../Utils/validateUserDetails";
 import {
