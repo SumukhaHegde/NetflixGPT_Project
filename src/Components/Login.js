@@ -7,10 +7,15 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../Utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../Utils/userSlice";
+import Header from "./Header";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
 
   const userName = useRef(null);
   const email = useRef(null);
@@ -36,8 +41,7 @@ const Login = () => {
         )
           .then((userCredential) => {
             // Signed up
-            const user = userCredential.user;
-            console.log(user);
+            navigate("/home");
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -51,9 +55,7 @@ const Login = () => {
           password.current.value
         )
           .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            console.log(user);
+            navigate("/home");
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -70,9 +72,7 @@ const Login = () => {
 
   return (
     <div className="text-white">
-      <div className="absolute py-2 px-4 z-10">
-        <img className="w-60" src={NETFLIX_LOGO} alt="Netflix Logo" />
-      </div>
+      <Header />
       <div className="absolute">
         <img src={LOGIN_PAGE_BACKGROUND_IMG} alt="BackGround Image" />
       </div>
