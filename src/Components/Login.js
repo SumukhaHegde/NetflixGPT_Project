@@ -1,21 +1,20 @@
 import React, { useRef, useState } from "react";
-import { NETFLIX_LOGO } from "../Utils/Images";
-import { LOGIN_PAGE_BACKGROUND_IMG } from "../Utils/Images";
-import validateDetails from "../Utils/validateUserDetails";
+import { LOGIN_PAGE_BACKGROUND_IMG } from "../Utils/Constant/Images";
+import validateDetails from "../Utils/UserValidations/validateUserDetails";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
-import { auth } from "../Utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { auth } from "../Utils/Constant/firebase";
 import { useDispatch } from "react-redux";
-import { addUser } from "../Utils/userSlice";
+import { addUser } from "../Utils/Store/userSlice";
 import Header from "./Header";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const userName = useRef(null);
   const email = useRef(null);
@@ -40,8 +39,28 @@ const Login = () => {
           password.current.value
         )
           .then((userCredential) => {
+            const user = userCredential.user;
+            updateProfile(user, {
+              displayName: userName.current.value,
+              photoURL:
+                "https://avatars.githubusercontent.com/u/12824231?s=48&v=4",
+            })
+              .then(() => {
+                const { uid, email, displayName, photoURL } = auth.currentUser;
+                dispatch(
+                  addUser({
+                    uid: uid,
+                    email: email,
+                    displayName: displayName,
+                    photoURL: photoURL,
+                  })
+                );
+              })
+              .catch((error) => {
+                // An error occurred
+                // ...
+              });
             // Signed up
-            navigate("/home");
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -54,9 +73,7 @@ const Login = () => {
           email.current.value,
           password.current.value
         )
-          .then((userCredential) => {
-            navigate("/home");
-          })
+          .then((userCredential) => {})
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
