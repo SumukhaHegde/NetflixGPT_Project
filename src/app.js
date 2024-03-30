@@ -1,11 +1,7 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Login from "./Components/Login";
-import Header from "./Components/Header";
 import "./index.css";
-import HomePage from "./Components/HomePage";
 import Body from "./Components/Body";
 import { Provider } from "react-redux";
-import appStore from "./Utils/appStore";
+import appStore from "./Utils/Store/appStore";
 
 const App = () => {
   {

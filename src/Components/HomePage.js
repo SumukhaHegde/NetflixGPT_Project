@@ -1,7 +1,15 @@
-import React from "react";
+import useNowPlayingMovies from "../Utils/Hooks/useNowplayingMovies";
+import Header from "./Header";
+import MainContainer from "./MainContainer";
 
 const HomePage = () => {
-  return <div>This is Home Page</div>;
+  useNowPlayingMovies();
+  return (
+    <div>
+      <Header />
+      <MainContainer />
+    </div>
+  );
 };
 
 export default HomePage;
