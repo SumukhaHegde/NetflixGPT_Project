@@ -8,7 +8,6 @@ const VideoBackground = ({ movieId }) => {
   const movieOfficialTrailer = useSelector(
     (store) => store.moviesList?.movieTrailer
   );
-  console.log(movieId);
   const getMovieTrailers = async () => {
     const movieTrailersData = await fetch(
       "https://api.themoviedb.org/3/movie/" + movieId + "/videos",
@@ -16,15 +15,13 @@ const VideoBackground = ({ movieId }) => {
     );
 
     const movieTrailersDataJson = await movieTrailersData.json();
-    // console.log(movieTrailersDataJson);
     const movieTrailers = movieTrailersDataJson.results.filter(
       (video) => video.name === "Official Trailer"
     );
 
     const movieTrailer = movieTrailers.length
-      ? movieTrailers
+      ? movieTrailers[0]
       : movieTrailersDataJson.results[0];
-    console.log(movieTrailer);
 
     dispatch(addMovieTrailer(movieTrailer));
   };
@@ -33,18 +30,16 @@ const VideoBackground = ({ movieId }) => {
     getMovieTrailers();
   }, []);
   return (
-    <div>
+    <div className="w-screen">
       <iframe
-        width="560"
-        height="315"
+        className="w-screen aspect-video"
         src={
           "https://www.youtube.com/embed/" +
-          movieId +
-          "?si=KJAOsQpEU0c0U6va?autoplay=1&mute=1"
+          movieOfficialTrailer?.key +
+          "?autoplay=1&mute=1"
         }
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
       ></iframe>
     </div>
   );
