@@ -10,5 +10,3 @@ const validateDetails = (email, password) => {
 };
 
 export default validateDetails;
-
-export const openaiKey = process.env.REACT_APP_OPENAI_KEY;
