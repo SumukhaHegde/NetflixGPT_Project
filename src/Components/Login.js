@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../Utils/Constant/firebase";
+import { auth } from "../Helper/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/Store/userSlice";
 import Header from "./Header";
@@ -91,12 +91,16 @@ const Login = () => {
     <div className="text-white">
       <Header />
       <div className="absolute">
-        <img src={LOGIN_PAGE_BACKGROUND_IMG} alt="BackGround Image" />
+        <img
+          className="h-screen object-cover md: w-screen"
+          src={LOGIN_PAGE_BACKGROUND_IMG}
+          alt="BackGround Image"
+        />
       </div>
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute bg-black w-3/12 mx-auto my-48 right-0 left-0 bg-opacity-60 rounded-lg text-white"
+        className="xsm:w-8/12 sm:w-6/12 absolute bg-black xmd:w-8/12 md:w-3/12  mx-auto my-48 xlg:mt-96 right-0 left-0 bg-opacity-60 rounded-lg text-white"
       >
         <h1 className="p-2 m-4 ml-6 font-bold text-3xl">
           {isSignIn ? "Sign In" : "Sign Up"}
