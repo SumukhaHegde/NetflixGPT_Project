@@ -40,7 +40,16 @@ const Header = () => {
         navigate("/");
       }
     });
-    return () => unSubscribe();
+
+    const unloadCallBack = (event) => {
+      handleSignOut();
+    };
+    window.addEventListener("unload", unloadCallBack);
+
+    return () => {
+      window.removeEventListener("unload", unloadCallBack);
+      unSubscribe();
+    };
   }, []);
 
   return (
