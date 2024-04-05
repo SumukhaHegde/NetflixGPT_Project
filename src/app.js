@@ -1,7 +1,9 @@
 import "./index.css";
 import Body from "./Components/Body";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import appStore from "./Utils/Store/appStore";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   {
@@ -22,6 +24,7 @@ const App = () => {
   // ]);
 > */
   }
+
   return (
     <div>
       {/* <RouterProvider router={appRouter} /> */}

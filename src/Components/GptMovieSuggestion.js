@@ -7,8 +7,6 @@ const GptMovieSuggestion = () => {
     (store) => store.gptSearch
   );
   if (!gptMovieNames) return null;
-  console.log(gptMovieNames);
-  console.log(tmdbMovieDeails);
   return (
     <div className="bg-black opacity-90 static">
       <div>
