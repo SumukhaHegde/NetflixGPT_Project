@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MovieCards from "./MovieCards";
 import carousel from "../Components/Carousel/carousel.css";
 import { doc } from "firebase/firestore";
@@ -25,6 +25,7 @@ const MovieList = ({ title, movies }) => {
     );
 
     const progressBarItemCount = progressBar.children.length;
+    console.log(progressBarItemCount);
 
     if (handle.classList.contains("carousel-left")) {
       if (sliderIndex - 1 < 0) {
@@ -76,7 +77,9 @@ const MovieList = ({ title, movies }) => {
       progressBar.append(barItem);
     }
   };
-  document.querySelectorAll(".progress-bar").forEach(progressBarCalculator);
+  useEffect(() => {
+    document.querySelectorAll(".progress-bar").forEach(progressBarCalculator);
+  });
 
   return (
     <div className="row mb-8">
