@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./Login";
 import HomePage from "./HomePage";
+import WatchMovie from "./WatchMovie";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -12,6 +13,10 @@ const Body = () => {
     {
       path: "/home",
       element: <HomePage />,
+    },
+    {
+      path: "/watch/:key",
+      element: <WatchMovie />,
     },
   ]);
 
