@@ -7,9 +7,11 @@ import Header from "./Header";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import GptSearchPage from "./GptSearchPage";
+import VideoPopupModal from "./VideoPopupModal";
 
 const HomePage = () => {
   const gptSearch = useSelector((store) => store.gptSearch);
+  const videoPopup = useSelector((store) => store.videoPopup);
   useNowPlayingMovies();
   usePopularMovies();
   useUpComingMovies();
@@ -26,6 +28,7 @@ const HomePage = () => {
           <SecondaryContainer />
         </>
       )}
+      {videoPopup.popup.isVideoPlaying && <VideoPopupModal />}
     </div>
   );
 };

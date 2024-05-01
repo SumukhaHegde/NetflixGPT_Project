@@ -100,7 +100,11 @@ const MovieList = ({ title, movies }) => {
         )}
         <div className="flex carousel-slider">
           {movies?.map((movie) => (
-            <MovieCards key={movie.id} posterId={movie.poster_path} />
+            <MovieCards
+              key={movie.id}
+              posterId={movie.poster_path}
+              videoId={movie.id}
+            />
           ))}
         </div>
         <button className="carousel-btn" onClick={scrollHandle}>

@@ -1,0 +1,6 @@
+.movie-poster {
+  transition: 1s;
+}
+.movie-poster :hover {
+  transform: scale(1.2);
+}

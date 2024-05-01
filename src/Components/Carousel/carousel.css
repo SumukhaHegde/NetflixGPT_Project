@@ -16,12 +16,19 @@
   transition: transform 250ms ease-in-out;
 }
 
-.carousel-slider > img {
+.carousel-slider > div {
   max-width: calc(100% / var(--imgs-per-screen));
   padding: var(--img-gap);
   flex: 0 0 25%;
   aspect-ratio: 16/9;
   flex-grow: 0;
+  height: 200px;
+}
+
+.movie-poster > img {
+  object-fit: fill;
+  height: 200px;
+  width: 100%;
 }
 
 .carousel-btn {
