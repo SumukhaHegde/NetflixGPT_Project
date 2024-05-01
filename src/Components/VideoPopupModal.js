@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { apiOptions } from "../Utils/Constant/apiOptions";
 import "./moviePopup.css";
 import { FcFlashOn, FcLike } from "react-icons/fc";
-import { Route } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 
 const VideoPopupModal = () => {
   const dispatch = useDispatch();
   const [videoKey, setVideoKey] = useState(null);
   const [videoDetails, setVideoDetails] = useState();
+  const navigate = useNavigate(null);
 
   const videoPopup = useSelector((store) => store.videoPopup);
   const closePopup = () => {
@@ -22,7 +23,9 @@ const VideoPopupModal = () => {
     );
   };
 
-  const playMovie = () => {};
+  const playMovie = () => {
+    navigate("/watch/" + videoKey);
+  };
 
   const getVideoDetails = async () => {
     const videoData = await fetch(
@@ -57,8 +60,6 @@ const VideoPopupModal = () => {
     };
   }, []);
 
-  console.log(videoDetails);
-
   return (
     <>
       {videoDetails && (
@@ -89,7 +90,7 @@ const VideoPopupModal = () => {
             <p className="video-description">Title : {videoDetails.overview}</p>
             <div className="video-genres">
               <span>
-                Type :
+                Type :{" "}
                 {videoDetails.genres.map((genre) => genre.name).join(", ")}
               </span>
               <span>Released on : {videoDetails.release_date}</span>

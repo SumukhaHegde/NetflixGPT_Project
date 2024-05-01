@@ -3,13 +3,14 @@ import { NETFLIX_LOGO } from "../Utils/Constant/Images";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Helper/firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addUser, removeUser } from "../Utils/Store/userSlice";
 import GptSearch from "./GptSearch";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate(null);
+  const params = useParams();
   const dispatch = useDispatch();
   const handleSignOut = () => {
     signOut(auth)
@@ -33,8 +34,10 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-
-        navigate("/home");
+        if (window.location.href.includes("undefined")) navigate("/home");
+        window.location.href.includes("home")
+          ? navigate("/home")
+          : navigate("/watch/" + params.key);
       } else {
         dispatch(removeUser());
         navigate("/");
