@@ -14,7 +14,7 @@ const GptSearch = () => {
   return (
     <div className="items-center flex">
       <button
-        className="bg-purple-700 p-2 text-white font-bold rounded-lg"
+        className="bg-purple-700 p-2 text-white font-bold rounded-lg xsm:p-2 xsm:m-0 xsm:text-[10px]"
         onClick={handleGptSearch}
       >
         {gptSearch.isGptSearchPage ? "Home Page" : "GPT Search"}
