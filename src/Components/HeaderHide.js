@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { auth } from "../Helper/firebase";
 import { LANGUAGE_CODE } from "../Utils/Constant/languageCode";
-import { changeConfig } from "../Utils/Store/configSlice";
+import { changeConfig, setConfirm } from "../Utils/Store/configSlice";
 import { setGptSearchPage } from "../Utils/Store/gptSlice";
 const HeaderHide = ({ setHeaderHide, imgRef }) => {
   // const navigate = useNavigate();
@@ -102,12 +102,14 @@ const HeaderHide = ({ setHeaderHide, imgRef }) => {
         >
           Logout
         </button>
-        <button
+
+        {/* //Todo - Will implement this in the next release */}
+        {/* <button
           className="w-28 h-10 font-normal border hover:border-gray-400 border-white rounded-md bg-gray-400 text-black  hover:bg-red-600 hover:text-white active:bg-red-950"
           onClick={handleDeleteAc}
         >
           Delete Ac.
-        </button>
+        </button> */}
       </div>
     </>
   );

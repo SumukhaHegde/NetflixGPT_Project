@@ -5,7 +5,7 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Helper/firebase";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { addUser, removeUser } from "../Utils/Store/userSlice";
-import GptSearch from "./GptSearch";
+import { RxHamburgerMenu } from "react-icons/rx";
 import HeaderHide from "./HeaderHide";
 
 const Header = () => {
@@ -70,11 +70,8 @@ const Header = () => {
       </Link>
       {user && (
         <div className="relative flex place-items-center justify-center">
-          {headerhide ? (
-            <i className="h-3 mt-1 opacity-50 fa-solid fa-sort-up"></i>
-          ) : (
-            <i className="h-3 mt-1 opacity-50 fa-solid fa-sort-down"></i>
-          )}
+          <RxHamburgerMenu size={28} color="white" />
+
           <img
             ref={imgRef}
             className="h-10 w-10 ml-1 mr-24 sm:h-12 sm:w-12 rounded-lg cursor-pointer contrast-200"
@@ -86,7 +83,7 @@ const Header = () => {
           <div
             className={
               headerhide
-                ? "invisible opacity-0 scale-50 transition-all text-white"
+                ? "invisible opacity-0 scale-50 transition-all"
                 : "inline-block opacity-100 scale-100 transition-all"
             }
           >
