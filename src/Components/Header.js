@@ -1,17 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NETFLIX_LOGO } from "../Utils/Constant/Images";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Helper/firebase";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { addUser, removeUser } from "../Utils/Store/userSlice";
-import GptSearch from "./GptSearch";
+import { RxHamburgerMenu } from "react-icons/rx";
+import HeaderHide from "./HeaderHide";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate(null);
   const params = useParams();
   const dispatch = useDispatch();
+  const [headerhide, setHeaderHide] = useState(true);
+  const imgRef = useRef();
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -56,31 +60,34 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute py-2 px-4 z-10 w-full bg-gradient-to-b from-black flex flex-col md:flex-row justify-between">
-      <div>
+    <div className="absolute pt-2 px-4 z-10 w-full bg-gradient-to-b from-black flex flex-col md:flex-row justify-between xsm:h-[95px]">
+      <Link to="/">
         <img
-          className="w-30 mx-auto h-12 md:mx-0 md:h-24 md:w-60"
+          className="w-40 sm:w-48 contrast-200"
           src={NETFLIX_LOGO}
-          alt="Netflix Logo"
+          alt="logo"
         />
-      </div>
+      </Link>
       {user && (
-        <div className="flex w-3/12 justify-evenly">
-          <GptSearch />
-          <div className="items-center flex pl-8">
-            <img
-              className="rounded-full w-16"
-              src={user.photoURL}
-              alt="userprofilepicture"
-            />
-          </div>
-          <div className="items-center flex justify-between">
-            <button
-              onClick={handleSignOut}
-              className="bg-red-700 text-white font-bold rounded-lg p-2 h-10"
-            >
-              Sign out
-            </button>
+        <div className="relative flex place-items-center justify-center">
+          <RxHamburgerMenu size={28} color="white" />
+
+          <img
+            ref={imgRef}
+            className="h-10 w-10 ml-1 mr-24 sm:h-12 sm:w-12 rounded-lg cursor-pointer contrast-200"
+            src="https://occ-0-4023-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229"
+            alt="userLogo"
+            onClick={() => setHeaderHide(!headerhide)}
+          />
+
+          <div
+            className={
+              headerhide
+                ? "invisible opacity-0 scale-50 transition-all"
+                : "inline-block opacity-100 scale-100 transition-all"
+            }
+          >
+            <HeaderHide setHeaderHide={setHeaderHide} imgRef={imgRef} />
           </div>
         </div>
       )}

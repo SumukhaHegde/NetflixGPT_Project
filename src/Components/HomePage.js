@@ -8,10 +8,13 @@ import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 import GptSearchPage from "./GptSearchPage";
 import VideoPopupModal from "./VideoPopupModal";
+import Confirm from "./confirm";
 
 const HomePage = () => {
   const gptSearch = useSelector((store) => store.gptSearch);
   const videoPopup = useSelector((store) => store.videoPopup);
+  const confirm = useSelector((store) => store.config?.confirm);
+
   useNowPlayingMovies();
   usePopularMovies();
   useUpComingMovies();
@@ -29,6 +32,11 @@ const HomePage = () => {
         </>
       )}
       {videoPopup.popup.isVideoPlaying && <VideoPopupModal />}
+      {/* {confirm && (
+        <div className="fixed top-0 backdrop-blur-sm p-2 w-full h-full flex items-center justify-center z-50">
+          <Confirm />
+        </div>
+      )} */}
     </div>
   );
 };
