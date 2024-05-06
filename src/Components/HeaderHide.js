@@ -73,7 +73,7 @@ const HeaderHide = ({ setHeaderHide, imgRef }) => {
           <span className="text-green-500">Hi!</span>{" "}
           {user?.displayName?.split(" ")[0]}
         </span>
-        <button
+        {/* <button
           className={
             gptSearch
               ? "w-28 h-10 font-normal border hover:border-gray-400 border-white rounded-md bg-gray-400/80 text-black  hover:bg-purple-600 hover:text-white active:bg-purple-950"
@@ -82,7 +82,7 @@ const HeaderHide = ({ setHeaderHide, imgRef }) => {
           onClick={handleGptSearchPage}
         >
           {gptSearch ? "Home Page" : "Gpt Search"}
-        </button>
+        </button> */}
         {gptSearch && (
           <select
             className="w-28 text-black bg-gray-400/80 border rounded-md hover:border-gray-400 border-white py-2 text-center cursor-pointer outline-none"

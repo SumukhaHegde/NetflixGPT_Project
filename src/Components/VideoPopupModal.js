@@ -91,7 +91,10 @@ const VideoPopupModal = () => {
             <div className="video-genres">
               <span>
                 Type :{" "}
-                {videoDetails.genres.map((genre) => genre.name).join(", ")}
+                {videoDetails.genres
+                  .filter((genre, index) => (index < 3 ? genre : ""))
+                  .map((genre) => genre.name)
+                  .join(", ")}
               </span>
               <span>Released on : {videoDetails.release_date}</span>
               <span className="video-popularity">
