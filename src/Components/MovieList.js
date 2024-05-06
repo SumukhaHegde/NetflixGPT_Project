@@ -83,8 +83,10 @@ const MovieList = ({ title, movies }) => {
 
   return (
     <div className="row mb-8">
-      <div className="header">
-        <h1 className="font-bold text-3xl text-white">{title}</h1>
+      <div className="header sm:pl-0">
+        <h1 className="font-bold sm:text-3xl text-white mbl:text-xl ">
+          {title}
+        </h1>
         <div className="progress-bar"></div>
       </div>
       <div className="flex carousel-container">

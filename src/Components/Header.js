@@ -7,6 +7,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { addUser, removeUser } from "../Utils/Store/userSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
 import HeaderHide from "./HeaderHide";
+import { BiSolidUpArrow } from "react-icons/bi";
+import { BiSolidDownArrow } from "react-icons/bi";
+import { setGptSearchPage } from "../Utils/Store/gptSlice";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
@@ -15,6 +18,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const [headerhide, setHeaderHide] = useState(true);
   const imgRef = useRef();
+  const gptSearch = useSelector((store) => store.gptSearch.isGptSearchPage);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -24,6 +28,10 @@ const Header = () => {
       .catch((error) => {
         // An error happened.
       });
+  };
+  const handleGptSearchPage = () => {
+    dispatch(setGptSearchPage());
+    setHeaderHide(true);
   };
 
   useEffect(() => {
@@ -60,30 +68,45 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute pt-2 px-4 z-10 w-full bg-gradient-to-b from-black flex flex-col md:flex-row justify-between xsm:h-[95px]">
+    <div className="absolute pt-2 px-4 z-10 w-full bg-gradient-to-b from-black flex flex-row justify-between  items-center xsm:justify-between">
       <Link to="/">
         <img
-          className="w-40 sm:w-48 contrast-200"
+          className="md:w-40 lg:w-48 contrast-200 sm:w-24 sm:h-16 msm:w-20 msm:h-16 xsm:w-14 xsm:h-10"
           src={NETFLIX_LOGO}
           alt="logo"
         />
       </Link>
+
       {user && (
-        <div className="relative flex place-items-center justify-center">
-          <RxHamburgerMenu size={28} color="white" />
+        <div className="relative flex place-items-center justify-center lgmr-36 md:mr-32 sm:mr-[20px] msm:mr-[18px]">
+          {/* <button
+            className={
+              gptSearch
+                ? "w-28 h-10 font-normal border hover:border-gray-400 border-white rounded-md bg-gray-400/80 text-black  hover:bg-purple-600 hover:text-white active:bg-purple-950"
+                : "w-28 h-10 font-normal border hover:border-gray-400 border-white rounded-md bg-gray-400/80 text-black  hover:bg-teal-600 hover:text-white active:bg-teal-950"
+            }
+            onClick={handleGptSearchPage}
+          >
+            {gptSearch ? "Home Page" : "Gpt Search"}
+          </button> */}
 
           <img
             ref={imgRef}
-            className="h-10 w-10 ml-1 mr-24 sm:h-12 sm:w-12 rounded-lg cursor-pointer contrast-200"
+            className="lg:h-12 lg:w-16 ml-5 mr-1 sm:w-8 sm:h-8 rounded-lg cursor-pointer contrast-200 mbl:w-8 msm:w-8 xsm:w-6"
             src="https://occ-0-4023-2186.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABfjwXqIYd3kCEU6KWsiHSHvkft8VhZg0yyD50a_pHXku4dz9VgxWwfA2ontwogStpj1NE9NJMt7sCpSKFEY2zmgqqQfcw1FMWwB9.png?r=229"
             alt="userLogo"
             onClick={() => setHeaderHide(!headerhide)}
           />
+          {headerhide ? (
+            <BiSolidUpArrow color="white" className="sm:w-4 lg:w-6 msm:w-2" />
+          ) : (
+            <BiSolidDownArrow color="white" className="sm:w-4 lg:w-6 msm:w-2" />
+          )}
 
           <div
             className={
               headerhide
-                ? "invisible opacity-0 scale-50 transition-all"
+                ? "invisible opacity-0 scale-50 transition-all text-white"
                 : "inline-block opacity-100 scale-100 transition-all"
             }
           >
